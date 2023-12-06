@@ -2,13 +2,13 @@ import { Component } from "react"
 import autoBind from "auto-bind/react"
 import NoteCreateForm from "./components/NoteCreateForm"
 import NoteWrapper from "./components/NoteWrapper"
-import { getIntialData } from "./utils"
+import { getAllNotes } from "./utils/data"
 
 class App extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      notes: getIntialData(),
+      notes: getAllNotes(),
       filteredNotes: [],
       isSearch: false,
     }
