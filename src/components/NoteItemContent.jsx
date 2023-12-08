@@ -18,5 +18,5 @@ NoteItemContent.propTypes = {
   id: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
   body: PropTypes.string.isRequired,
-  createdAt: PropTypes.number.isRequired,
+  createdAt: PropTypes.string.isRequired,
 }

@@ -9,7 +9,7 @@ export default function NoteSearchBar({ keyword, searchHandler }) {
       <input
         value={keyword}
         type="text"
-        placeholder="Judul Catatan ..."
+        placeholder="judul catatan"
         onChange={(ev) => searchHandler(ev.target.value)}
         className="block rounded-lg border focus:ring-blue-500 focus:border-blue-500 w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
       />

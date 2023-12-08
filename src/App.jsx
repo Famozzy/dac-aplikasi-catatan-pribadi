@@ -3,6 +3,7 @@ import HomePage from "./pages/HomePage"
 import NotFoundPage from "./pages/NotFoundPage"
 import NoteDetailPage from "./pages/NoteDetailPage"
 import ArchivedNotePage from "./pages/ArchivedNotePage"
+import CreateNotePage from "./pages/CreateNotePage"
 import Navbar from "./components/Navbar"
 
 const App = () => {
@@ -13,6 +14,7 @@ const App = () => {
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/archived" element={<ArchivedNotePage />} />
+          <Route path="/notes/new" element={<CreateNotePage />} />
           <Route path="/notes/:id" element={<NoteDetailPage />} />
           <Route path="*" element={<NotFoundPage />} />
         </Routes>

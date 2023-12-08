@@ -3,7 +3,7 @@ import PropTypes from "prop-types"
 
 export default function NavItem({ name, path, icon }) {
   return (
-    <Link to={path} className="hover:text-blue-400">
+    <Link to={path} className="flex gap-1 hover:text-blue-400 sm:flex-col items-center">
       {icon}
       {name}
     </Link>

@@ -1,19 +1,45 @@
 import { Component } from "react"
 import { useParams } from "react-router-dom"
+import autoBind from "auto-bind"
 import PropTypes from "prop-types"
-import { getNote } from "../utils/data"
-import showFormattedDate from "../utils/showFormattedDate"
+import { editNote, getNote } from "../utils/data"
+
+import { useNavigate } from "react-router-dom"
+import EditableContent from "../components/EditableContent"
 
 class NoteDetailPage extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      note: getNote(this.props.id),
+      title: this.props.note.title,
+      body: this.props.note.body,
     }
+    autoBind(this)
+  }
+
+  inputHandler(ev) {
+    const targetNodeName = {
+      h1: "title",
+      p: "body",
+    }
+
+    const key = targetNodeName[ev.target.nodeName.toLowerCase()]
+    this.setState(() => ({
+      [key]: ev.target.innerHTML,
+    }))
+  }
+
+  saveChanges() {
+    const { id } = this.props.note
+    const { title, body } = this.state
+    editNote({ id, title, body })
+    this.props.navigate("/")
   }
 
   render() {
-    if (!this.state.note) {
+    const { note } = this.props
+
+    if (!note) {
       return (
         <div className="flex flex-col gap-4 mt-16 max-w-xl m-auto text-gray-400">
           <h1 className="text-2xl font-medium">Catatan tidak ditemukan</h1>
@@ -21,23 +47,35 @@ class NoteDetailPage extends Component {
       )
     }
 
-    const { title, body, createdAt } = this.state.note
-
+    const { title, body, createdAt } = note
+    const isDisabled = this.state.title === title && this.state.body === body
     return (
-      <div className="flex flex-col gap-4 mt-4 max-w-xl m-auto">
-        <h1 className="text-2xl font-bold">{title}</h1>
-        <span className="text-gray-400 text-sm">{showFormattedDate(createdAt)}</span>
-        <p>{body}</p>
-      </div>
+      <EditableContent
+        title={title}
+        body={body}
+        createdAt={createdAt}
+        isDisabled={isDisabled}
+        inputHandler={this.inputHandler}
+        saveHandler={this.saveChanges}
+      />
     )
   }
 }
 
 NoteDetailPage.propTypes = {
-  id: PropTypes.string.isRequired,
+  note: PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+    body: PropTypes.string.isRequired,
+    createdAt: PropTypes.string.isRequired,
+    archived: PropTypes.bool.isRequired,
+  }),
+  navigate: PropTypes.func.isRequired,
 }
 
 export default function NoteDetailWrapper() {
   const { id } = useParams()
-  return <NoteDetailPage id={id} />
+  const navigate = useNavigate()
+  const note = getNote(id)
+  return <NoteDetailPage note={note} navigate={navigate} />
 }
