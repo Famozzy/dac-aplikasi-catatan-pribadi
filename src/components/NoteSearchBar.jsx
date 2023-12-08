@@ -1,10 +1,13 @@
-export default function NoteSearchBar({ searchHandler }) {
+import PropTypes from "prop-types"
+
+export default function NoteSearchBar({ keyword, searchHandler }) {
   return (
-    <div className="w-full bg-gray-800 max-w-xl mx-auto border border-gray-700 rounded-lg p-4">
+    <div className="w-full mt-4 bg-gray-800 max-w-xl mx-auto border border-gray-700 rounded-lg p-4">
       <label htmlFor="search" className="block mb-2 font-medium text-sm text-gray-200">
         Cari Catatan
       </label>
       <input
+        value={keyword}
         type="text"
         placeholder="Judul Catatan ..."
         onChange={(ev) => searchHandler(ev.target.value)}
@@ -12,4 +15,9 @@ export default function NoteSearchBar({ searchHandler }) {
       />
     </div>
   )
+}
+
+NoteSearchBar.propTypes = {
+  keyword: PropTypes.string.isRequired,
+  searchHandler: PropTypes.func.isRequired,
 }
