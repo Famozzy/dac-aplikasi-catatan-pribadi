@@ -1,38 +1,21 @@
-import { Component } from "react"
-import autoBind from "auto-bind/react"
+import { useState } from "react"
 import NoteList from "../components/NoteList"
 import { unarchiveNote, deleteNote, getArchivedNotes } from "../utils/data"
 
-class ArchivedNotePage extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      notes: getArchivedNotes(),
-    }
-    autoBind(this)
-  }
+export default function ArchivedNotePage() {
+  const [notes, setNotes] = useState(getArchivedNotes())
 
-  deleteNoteHandler(id) {
+  const deleteNoteHandler = (id) => {
     deleteNote(id)
-    this.setState({ notes: getArchivedNotes() })
+    setNotes(getArchivedNotes())
   }
 
-  archiveNoteHandler(id) {
+  const archiveNoteHandler = (id) => {
     unarchiveNote(id)
-    this.setState({ notes: getArchivedNotes() })
+    setNotes(getArchivedNotes())
   }
 
-  render() {
-    const { notes } = this.state
-    return (
-      <NoteList
-        title={"Arsip"}
-        notes={notes}
-        archiveHandler={this.archiveNoteHandler}
-        deleteHandler={this.deleteNoteHandler}
-      />
-    )
-  }
+  return (
+    <NoteList title={"Arsip"} notes={notes} archiveHandler={archiveNoteHandler} deleteHandler={deleteNoteHandler} />
+  )
 }
-
-export default ArchivedNotePage

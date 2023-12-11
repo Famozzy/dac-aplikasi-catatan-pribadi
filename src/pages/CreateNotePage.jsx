@@ -1,60 +1,41 @@
-import { Component } from "react"
-import autoBind from "auto-bind/react"
+import { useState } from "react"
 import EditableContent from "../components/EditableContent"
 import { addNote } from "../utils/data"
-import PropTypes from "prop-types"
 import { useNavigate } from "react-router-dom"
 
 const defaultTitle = "Catatan Baru"
 const defaultBody = "Tulis sesuatu..."
 
-class CreateNotePage extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      title: defaultTitle,
-      body: defaultBody,
-    }
-    autoBind(this)
-  }
-
-  inputHandler(ev) {
-    const targetNodeName = {
-      h1: "title",
-      p: "body",
-    }
-
-    const key = targetNodeName[ev.target.nodeName.toLowerCase()]
-    this.setState(() => ({
-      [key]: ev.target.innerHTML,
-    }))
-  }
-
-  saveHandler() {
-    const { title, body } = this.state
-    addNote({ title, body })
-    this.props.navigate("/")
-  }
-
-  render() {
-    return (
-      <EditableContent
-        title={defaultTitle}
-        body={defaultBody}
-        createdAt={new Date().toISOString()}
-        isDisabled={false}
-        inputHandler={this.inputHandler}
-        saveHandler={this.saveHandler}
-      />
-    )
-  }
-}
-
-CreateNotePage.propTypes = {
-  navigate: PropTypes.func.isRequired,
-}
-
-export default function CreateNotePageWrapper() {
+export default function CreateNotePage() {
   const navigate = useNavigate()
-  return <CreateNotePage navigate={navigate} />
+
+  const [title, setTitle] = useState(defaultTitle)
+  const [body, setBody] = useState(defaultBody)
+
+  const handleTitleInput = (ev) => setTitle(ev.target.innerText)
+  const handleBodyInput = (ev) => setBody(ev.target.innerText)
+
+  const inputHandler = (ev) => {
+    const targetNodeName = {
+      h1: handleTitleInput,
+      p: handleBodyInput,
+    }
+    targetNodeName[ev.target.nodeName.toLowerCase()](ev)
+  }
+
+  const saveHandler = () => {
+    addNote({ title, body })
+    navigate("/")
+  }
+
+  return (
+    <EditableContent
+      title={defaultTitle}
+      body={defaultBody}
+      createdAt={new Date().toISOString()}
+      isDisabled={false}
+      inputHandler={inputHandler}
+      saveHandler={saveHandler}
+    />
+  )
 }
