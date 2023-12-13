@@ -2,14 +2,14 @@ import showFormattedDate from "../utils/showFormattedDate"
 import { FolderPlus } from "@phosphor-icons/react"
 import PropTypes from "prop-types"
 
-export default function EditableContent({ title, body, isDisabled, createdAt, inputHandler, saveHandler }) {
+export default function NoteInput({ title, body, createdAt, inputHandler, saveHandler }) {
   return (
     <div className="w-full flex flex-col gap-4 mt-4 max-w-xl m-auto">
       <div className="flex ml-auto">
         <button
           className="flex items-center gap-1 px-3 py-1.5 text-sm rounded-md border border-blue-300 text-blue-400 hover:text-white hover:bg-blue-500 focus:ring-blue-900 disabled:opacity-50"
           onClick={saveHandler}
-          disabled={isDisabled}
+          disabled={!title ? true : false}
         >
           <FolderPlus size={24} weight="fill" className="inline" />
           Simpan
@@ -26,11 +26,10 @@ export default function EditableContent({ title, body, isDisabled, createdAt, in
   )
 }
 
-EditableContent.propTypes = {
+NoteInput.propTypes = {
   title: PropTypes.string.isRequired,
   body: PropTypes.string.isRequired,
   createdAt: PropTypes.string.isRequired,
-  isDisabled: PropTypes.bool.isRequired,
   inputHandler: PropTypes.func.isRequired,
   saveHandler: PropTypes.func.isRequired,
 }

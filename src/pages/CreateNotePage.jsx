@@ -1,7 +1,7 @@
-import { useState } from "react"
-import EditableContent from "../components/EditableContent"
+import NoteInput from "../components/NoteInput"
 import { addNote } from "../utils/data"
 import { useNavigate } from "react-router-dom"
+import useInput from "../hooks/useInput"
 
 const defaultTitle = "Catatan Baru"
 const defaultBody = "Tulis sesuatu..."
@@ -9,11 +9,8 @@ const defaultBody = "Tulis sesuatu..."
 export default function CreateNotePage() {
   const navigate = useNavigate()
 
-  const [title, setTitle] = useState(defaultTitle)
-  const [body, setBody] = useState(defaultBody)
-
-  const handleTitleInput = (ev) => setTitle(ev.target.innerText)
-  const handleBodyInput = (ev) => setBody(ev.target.innerText)
+  const [title, handleTitleInput] = useInput(defaultTitle)
+  const [body, handleBodyInput] = useInput(defaultBody)
 
   const inputHandler = (ev) => {
     const targetNodeName = {
@@ -29,11 +26,10 @@ export default function CreateNotePage() {
   }
 
   return (
-    <EditableContent
+    <NoteInput
       title={defaultTitle}
       body={defaultBody}
       createdAt={new Date().toISOString()}
-      isDisabled={false}
       inputHandler={inputHandler}
       saveHandler={saveHandler}
     />

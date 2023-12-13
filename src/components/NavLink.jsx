@@ -1,16 +1,19 @@
 import { Link } from "react-router-dom"
+import NavButton from "./NavButton"
 import PropTypes from "prop-types"
 
-export default function NavItem({ name, path, icon }) {
+export default function NavLink({ name, path, icon }) {
   return (
-    <Link to={path} className="flex gap-1 hover:text-blue-400 sm:flex-col items-center">
-      {icon}
-      {name}
+    <Link to={path}>
+      <NavButton>
+        {icon}
+        {name}
+      </NavButton>
     </Link>
   )
 }
 
-NavItem.propTypes = {
+NavLink.propTypes = {
   name: PropTypes.string.isRequired,
   path: PropTypes.string.isRequired,
   icon: PropTypes.element.isRequired,

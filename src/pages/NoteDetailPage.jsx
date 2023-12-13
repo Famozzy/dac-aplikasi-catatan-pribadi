@@ -1,20 +1,21 @@
+import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
+import NoteDetail from "../components/NoteDetail"
 import { getNote } from "../utils/data"
-import EditableContent from "../components/EditableContent"
 
 export default function NotedetailPage() {
   const { id } = useParams()
-  const note = getNote(id)
+  const [note, setNote] = useState({
+    title: "",
+    body: "",
+    createdAt: "",
+  })
+
+  useEffect(() => {
+    const note = getNote(id)
+    setNote(note)
+  }, [])
 
   const { title, body, createdAt } = note
-  return (
-    <EditableContent
-      title={title}
-      body={body}
-      createdAt={createdAt}
-      isDisabled={true}
-      inputHandler={() => console.log("onInput")}
-      saveHandler={() => console.log("saveChanges")}
-    />
-  )
+  return <NoteDetail title={title} body={body} createdAt={createdAt} />
 }

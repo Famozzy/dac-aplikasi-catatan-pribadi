@@ -2,9 +2,12 @@ import ReactDOM from "react-dom/client"
 import { BrowserRouter } from "react-router-dom"
 import "./style/tailwind.css"
 import App from "./App"
+import Provider from "./Provider"
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-  <BrowserRouter>
-    <App />
-  </BrowserRouter>
+  <Provider>
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
+  </Provider>
 )

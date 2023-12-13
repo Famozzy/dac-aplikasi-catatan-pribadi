@@ -1,15 +1,17 @@
-import { useState } from "react"
+import { useState, useContext } from "react"
 import { useSearchParams } from "react-router-dom"
 import NoteList from "../components/NoteList"
 import NoteSearchBar from "../components/NoteSearchBar"
 import { getActiveNotes, archiveNote, deleteNote } from "../utils/data"
+import { AuthedUserContext } from "../contexts/AuthedUserContext"
 
-export default function HomePage() {
+export default function NotePage() {
   const [searchParams, setSearchParams] = useSearchParams()
-  const defaultKeyword = searchParams.get("keyword")
 
   const [notes, setNotes] = useState(getActiveNotes())
-  const [keyword, setKeyword] = useState(defaultKeyword || "")
+  const [keyword, setKeyword] = useState(() => searchParams.get("keyword") || "")
+
+  const { authedUser } = useContext(AuthedUserContext)
 
   const deleteNoteHandler = (id) => {
     deleteNote(id)
@@ -30,6 +32,7 @@ export default function HomePage() {
 
   return (
     <>
+      <h1 className="w-full mx-auto max-w-lg text-2xl font-medium sm:mt-2">Catatan {authedUser.name}</h1>
       <NoteSearchBar keyword={keyword} searchHandler={searchHandler} />
       <NoteList
         title={"Catatan Saya"}
