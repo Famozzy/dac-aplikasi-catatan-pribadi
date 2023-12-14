@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
 import NoteDetail from "../components/NoteDetail"
-import { getNote } from "../utils/data"
+import { getNote } from "../utils/api"
 
 export default function NotedetailPage() {
   const { id } = useParams()
@@ -9,13 +9,23 @@ export default function NotedetailPage() {
     title: "",
     body: "",
     createdAt: "",
+    archived: null,
   })
 
   useEffect(() => {
-    const note = getNote(id)
-    setNote(note)
+    const fetchData = async () => {
+      const { data } = await getNote(id)
+      setNote({
+        title: data.title,
+        body: data.body,
+        createdAt: data.createdAt,
+        archived: data.archived,
+      })
+    }
+
+    fetchData()
   }, [])
 
-  const { title, body, createdAt } = note
-  return <NoteDetail title={title} body={body} createdAt={createdAt} />
+  const { title, body, createdAt, archived } = note
+  return <NoteDetail title={title} body={body} createdAt={createdAt} archived={archived} />
 }

@@ -1,5 +1,5 @@
 import { useContext } from "react"
-import { ArchiveBox, Note, NoteBlank, SignOut, Translate } from "@phosphor-icons/react"
+import { ArchiveBox, Note, NoteBlank, SignOut, SunDim, Translate } from "@phosphor-icons/react"
 import NavLink from "./NavLink"
 import NavButton from "./NavButton"
 import { AuthedUserContext } from "../contexts/AuthedUserContext"
@@ -25,9 +25,23 @@ export default function Navbar() {
     },
   ]
 
-  const logoutHandler = () => {
-    console.log("Logout")
-  }
+  const navButtonList = [
+    {
+      name: "Gelap",
+      handleClick: () => alert("theme"),
+      icon: <SunDim size={24} />,
+    },
+    {
+      name: "ID",
+      handleClick: () => alert("locale"),
+      icon: <Translate size={24} />,
+    },
+    {
+      name: "Logout",
+      handleClick: clearAuthedUser,
+      icon: <SignOut size={24} />,
+    },
+  ]
 
   return (
     <header className="fixed w-full top-0 bg-gray-900/30 m-auto mb-4 py-5 px-3 border border-gray-700 backdrop-blur-sm">
@@ -35,14 +49,11 @@ export default function Navbar() {
         {navLinkList.map((nav, index) => (
           <NavLink key={index} name={nav.name} path={nav.path} icon={nav.icon} />
         ))}
-        <NavButton onClick={logoutHandler}>
-          <Translate size={24} />
-          ID
-        </NavButton>
-        <NavButton onClick={clearAuthedUser}>
-          <SignOut size={24} />
-          Logout
-        </NavButton>
+        {navButtonList.map((nav, index) => (
+          <NavButton key={index} onClick={nav.handleClick}>
+            {nav.icon} {nav.name}
+          </NavButton>
+        ))}
       </nav>
     </header>
   )

@@ -16,7 +16,6 @@ export default function LoginForm() {
     const { error, data } = await login({ email, password })
 
     if (!error) {
-      console.log(data)
       await setUserLogged(data)
     }
   }

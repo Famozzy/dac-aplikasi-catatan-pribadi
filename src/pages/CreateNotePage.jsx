@@ -1,7 +1,7 @@
+import { useState } from "react"
 import NoteInput from "../components/NoteInput"
-import { addNote } from "../utils/data"
+import { addNote } from "../utils/api"
 import { useNavigate } from "react-router-dom"
-import useInput from "../hooks/useInput"
 
 const defaultTitle = "Catatan Baru"
 const defaultBody = "Tulis sesuatu..."
@@ -9,19 +9,20 @@ const defaultBody = "Tulis sesuatu..."
 export default function CreateNotePage() {
   const navigate = useNavigate()
 
-  const [title, handleTitleInput] = useInput(defaultTitle)
-  const [body, handleBodyInput] = useInput(defaultBody)
+  const [title, setTitle] = useState(defaultTitle)
+  const [body, setBody] = useState(defaultBody)
 
-  const inputHandler = (ev) => {
+  const inputHandler = (event) => {
     const targetNodeName = {
-      h1: handleTitleInput,
-      p: handleBodyInput,
+      H1: setTitle,
+      P: setBody,
     }
-    targetNodeName[ev.target.nodeName.toLowerCase()](ev)
+    targetNodeName[event.target.nodeName](event.target.textContent)
+    console.log(title, body)
   }
 
-  const saveHandler = () => {
-    addNote({ title, body })
+  const saveHandler = async () => {
+    await addNote({ title, body })
     navigate("/")
   }
 

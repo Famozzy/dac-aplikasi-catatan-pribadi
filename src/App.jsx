@@ -53,7 +53,6 @@ const App = () => {
       <main className="flex flex-col my-24 px-3 gap-4 mx-auto w-full max-w-7xl">
         <Routes>
           <Route path="/" element={<HomePage />} />
-          <Route path="/login" element={<LoginPage />} />
           <Route path="/archived" element={<ArchivedNotePage />} />
           <Route path="/notes/new" element={<CreateNotePage />} />
           <Route path="/notes/:id" element={<NoteDetailPage />} />
