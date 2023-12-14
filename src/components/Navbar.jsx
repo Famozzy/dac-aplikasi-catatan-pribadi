@@ -3,23 +3,26 @@ import { ArchiveBox, Note, NoteBlank, SignOut, SunDim, Translate } from "@phosph
 import NavLink from "./NavLink"
 import NavButton from "./NavButton"
 import { AuthedUserContext } from "../contexts/AuthedUserContext"
+import { LocaleContext } from "../contexts/LocaleContext"
+import locales from "../utils/locales"
 
 export default function Navbar() {
   const { clearAuthedUser } = useContext(AuthedUserContext)
+  const { locale, toggleLocale } = useContext(LocaleContext)
 
   const navLinkList = [
     {
-      name: "Catatan Saya",
+      name: locales[locale].navHome,
       path: "/",
       icon: <Note size={24} />,
     },
     {
-      name: "Arsip",
+      name: locales[locale].navArchive,
       path: "/archived",
       icon: <ArchiveBox size={24} />,
     },
     {
-      name: "Buat Catatan",
+      name: locales[locale].navCreate,
       path: "/notes/new",
       icon: <NoteBlank size={24} />,
     },
@@ -27,17 +30,17 @@ export default function Navbar() {
 
   const navButtonList = [
     {
-      name: "Gelap",
+      name: locales[locale].navDark,
       handleClick: () => alert("theme"),
       icon: <SunDim size={24} />,
     },
     {
-      name: "ID",
-      handleClick: () => alert("locale"),
+      name: locale,
+      handleClick: toggleLocale,
       icon: <Translate size={24} />,
     },
     {
-      name: "Logout",
+      name: locales[locale].navLogout,
       handleClick: clearAuthedUser,
       icon: <SignOut size={24} />,
     },

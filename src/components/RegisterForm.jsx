@@ -1,10 +1,15 @@
+import { useContext } from "react"
 import Input from "./Input"
 import useInput from "../hooks/useInput"
 import { useNavigate } from "react-router-dom"
 import { register } from "../utils/api"
 import toast from "react-hot-toast"
+import { LocaleContext } from "../contexts/LocaleContext"
+import locales from "../utils/locales"
 
 export default function RegisterForm() {
+  const { locale } = useContext(LocaleContext)
+
   const [name, handleNameChange] = useInput("")
   const [email, handleEmailChange] = useInput("")
   const [password, handlePasswordChange] = useInput("")
@@ -16,13 +21,13 @@ export default function RegisterForm() {
     event.preventDefault()
 
     if (password !== passwordConfirmation) {
-      return toast.error("Password dan Konfirmasi Password harus sama!")
+      return toast.error(locales[locale].registerConfirmPasswordError)
     }
 
     const { error } = await register({ name, email, password, password_confirmation: passwordConfirmation })
 
     if (!error) {
-      toast.success("Registrasi berhasil!")
+      toast.success(locales[locale].registerSuccess)
       navigate("/")
     }
   }
@@ -30,12 +35,12 @@ export default function RegisterForm() {
   return (
     <form onSubmit={handleSubmit} className="px-8 space-y-4 sm:px-4">
       <Input
-        label="Nama"
+        label={locales[locale].registerNameInput}
         id="name"
         type="text"
         value={name}
         onChange={handleNameChange}
-        placeholder="nama.."
+        placeholder={`${locales[locale].registerNameInput.toLowerCase()}..`}
         required={true}
       />
       <Input
@@ -57,19 +62,19 @@ export default function RegisterForm() {
         required={true}
       />
       <Input
-        label="Konfirmasi Password"
+        label={locales[locale].registerConfirmPasswordInput}
         id="password_confirmation"
         type="password"
         value={passwordConfirmation}
         onChange={handlePasswordConfirmationChange}
-        placeholder="konfirmasi password.."
+        placeholder={`${locales[locale].registerConfirmPasswordInput.toLowerCase()}..`}
         required={true}
       />
       <button
         type="submit"
         className="w-full py-2.5 bg-blue-500 text-white rounded-lg hover:bg-blue-600 focus:ring-blue-900"
       >
-        Daftar
+        {locales[locale].registerTitle}
       </button>
     </form>
   )

@@ -4,13 +4,16 @@ import NoteList from "../components/NoteList"
 import NoteSearchBar from "../components/NoteSearchBar"
 import { AuthedUserContext } from "../contexts/AuthedUserContext"
 import useNotes from "../hooks/useNotes"
+import { LocaleContext } from "../contexts/LocaleContext"
+import locales from "../utils/locales"
 
 export default function NotePage() {
+  const { authedUser } = useContext(AuthedUserContext)
+  const { locale } = useContext(LocaleContext)
+
   const { notes, loading, deleteNoteHandler, archiveNoteHandler } = useNotes("active")
   const [searchParams, setSearchParams] = useSearchParams()
   const [keyword, setKeyword] = useState(() => searchParams.get("keyword") || "")
-
-  const { authedUser } = useContext(AuthedUserContext)
 
   const searchHandler = (keyword) => {
     setKeyword(keyword)
@@ -21,10 +24,12 @@ export default function NotePage() {
 
   return (
     <>
-      <h1 className="w-full mx-auto max-w-xl pl-2 text-2xl font-medium sm:mt-2">Catatan {authedUser.name}</h1>
+      <h1 className="w-full mx-auto max-w-xl pl-2 text-xl font-medium sm:mt-2">
+        {`${locales[locale].greeting} ${authedUser.name}`}
+      </h1>
       <NoteSearchBar keyword={keyword} searchHandler={searchHandler} />
       <NoteList
-        title={"Catatan Saya"}
+        title={locales[locale].noteActive}
         notes={noteToRender}
         archiveHandler={archiveNoteHandler}
         deleteHandler={deleteNoteHandler}

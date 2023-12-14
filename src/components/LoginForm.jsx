@@ -3,12 +3,15 @@ import Input from "./Input"
 import useInput from "../hooks/useInput"
 import { login } from "../utils/api"
 import { AuthedUserContext } from "../contexts/AuthedUserContext"
+import { LocaleContext } from "../contexts/LocaleContext"
+import locales from "../utils/locales"
 
 export default function LoginForm() {
+  const { locale } = useContext(LocaleContext)
+  const { setUserLogged } = useContext(AuthedUserContext)
+
   const [email, handleEmailChange] = useInput("")
   const [password, handlePasswordChange] = useInput("")
-
-  const { setUserLogged } = useContext(AuthedUserContext)
 
   const handleSubmit = async (event) => {
     event.preventDefault()
@@ -44,7 +47,7 @@ export default function LoginForm() {
         type="submit"
         className="w-full py-2.5 bg-blue-500 text-white rounded-lg hover:bg-blue-600 focus:ring-blue-900"
       >
-        Masuk
+        {locales[locale].loginTitle}
       </button>
     </form>
   )
