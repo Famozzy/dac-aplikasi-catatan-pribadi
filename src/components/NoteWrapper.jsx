@@ -1,6 +1,7 @@
 import React from "react"
 import NoteItemFallback from "./NoteItemFallback"
 import SkeletonCard from "./SkeletonCard"
+import PropTypes from "prop-types"
 
 export default function NoteWrapper({ children, isLoading }) {
   if (isLoading) {
@@ -20,4 +21,9 @@ export default function NoteWrapper({ children, isLoading }) {
   }
 
   return <div className="grid grid-cols-3 gap-3 mt-5 lg:grid-cols-2 sm:block sm:space-y-3">{children}</div>
+}
+
+NoteWrapper.propTypes = {
+  children: PropTypes.node.isRequired,
+  isLoading: PropTypes.bool.isRequired,
 }

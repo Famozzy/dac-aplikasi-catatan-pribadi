@@ -1,5 +1,6 @@
 import { createContext, useState, useMemo } from "react"
 import { getUserLogged, putAccessToken } from "../utils/api"
+import PropTypes from "prop-types"
 
 export const AuthedUserContext = createContext()
 
@@ -28,4 +29,8 @@ export function AuthedUserProvider({ children }) {
   )
 
   return <AuthedUserContext.Provider value={contextValue}>{children}</AuthedUserContext.Provider>
+}
+
+AuthedUserProvider.propTypes = {
+  children: PropTypes.node.isRequired,
 }
