@@ -9,7 +9,7 @@ export default function NotedetailPage() {
     title: "",
     body: "",
     createdAt: "",
-    archived: null,
+    archived: false,
   })
 
   useEffect(() => {
