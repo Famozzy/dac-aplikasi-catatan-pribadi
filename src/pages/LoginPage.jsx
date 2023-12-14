@@ -11,11 +11,11 @@ export default function LoginPage() {
   return (
     <>
       <LocaleButton lang={locale} toggleLocale={toggleLocale} />
-      <section className="bg-gray-800 border border-gray-700 backdrop-blur-sm rounded-xl py-14">
+      <section className="bg-gray-100 border-gray-300 shadow-md border backdrop-blur-sm rounded-xl py-14 dark:bg-gray-800 dark:border-gray-700">
         <h1 className="text-center text-2xl font-bold">{locales[locale].loginTitle}</h1>
-        <p className="text-center text-gray-400 mt-1 mb-5">{locales[locale].loginDescription}</p>
+        <p className="text-center mt-1 mb-5 text-gray-600 dark:text-gray-400">{locales[locale].loginDescription}</p>
         <LoginForm />
-        <p className="text-center text-gray-400 mt-5">
+        <p className="text-center mt-5 text-gray-600 dark:text-gray-400">
           {locales[locale].loginMessage}{" "}
           <Link to="/register" className="text-blue-400 hover:underline">
             {locales[locale].loginLink}

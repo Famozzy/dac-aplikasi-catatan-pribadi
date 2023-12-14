@@ -11,14 +11,19 @@ export default function NoteInput({ title, body, createdAt, inputHandler, saveHa
     <div className="w-full flex flex-col gap-4 mt-4 max-w-xl m-auto">
       <div className="flex ml-auto">
         <button
-          className="flex items-center gap-1 px-3 py-1.5 text-sm rounded-md border border-blue-300 text-blue-400 hover:text-white hover:bg-blue-500 focus:ring-blue-900 disabled:opacity-50"
+          className="flex items-center gap-1 px-3 py-1.5 text-sm rounded-md border-2 border-blue-500 hover:text-white text-blue-600 hover:bg-blue-700 dark:border-blue-300 dark:text-blue-400 dark:hover:bg-blue-500 focus:ring-blue-900 disabled:opacity-50"
           onClick={saveHandler}
         >
           <FolderPlus size={24} weight="fill" className="inline" />
           {locale === "ID" ? "Simpan" : "Save"}
         </button>
       </div>
-      <h1 className="text-2xl font-bold" onInput={inputHandler} suppressContentEditableWarning="true" contentEditable>
+      <h1
+        className="text-gray-700 text-2xl font-bold dark:text-gray-400"
+        onInput={inputHandler}
+        suppressContentEditableWarning="true"
+        contentEditable
+      >
         {title}
       </h1>
       <span className="text-gray-400 text-sm">{showFormattedDate(createdAt, locale)}</span>

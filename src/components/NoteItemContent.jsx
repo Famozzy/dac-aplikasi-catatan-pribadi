@@ -9,11 +9,11 @@ export default function NoteItemContent({ id, title, body, createdAt }) {
 
   return (
     <Link className="block" to={`/notes/${id}`}>
-      <h1 title={title} className="text-xl font-medium text-gray-200 truncate">
+      <h1 title={title} className="text-xl font-medium truncate dark:text-gray-200">
         {title}
       </h1>
-      <span className="text-gray-400 text-sm">{showFormattedDate(createdAt, locale)}</span>
-      <p className="text-gray-300 overflow-hidden my-4 truncate">{body}</p>
+      <span className="text-gray-600 text-sm dark:text-gray-400">{showFormattedDate(createdAt, locale)}</span>
+      <p className="overflow-hidden my-4 truncate dark:text-gray-300">{body}</p>
     </Link>
   )
 }

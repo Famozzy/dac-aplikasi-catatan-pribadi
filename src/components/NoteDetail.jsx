@@ -25,7 +25,7 @@ export default function NoteDetail({ title, body, createdAt, archived }) {
         )}
       </span>
       <h1 className="text-2xl font-bold">{title}</h1>
-      <span className="text-gray-400 text-sm">{showFormattedDate(createdAt, locale) || ""}</span>
+      <span className="text-sm text-gray-600 dark:text-gray-400">{showFormattedDate(createdAt, locale) || ""}</span>
       <p>{body}</p>
     </div>
   )

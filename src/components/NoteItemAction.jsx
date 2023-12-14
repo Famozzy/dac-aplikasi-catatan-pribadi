@@ -14,14 +14,14 @@ export default function NoteItemAction({ isArchived, archiveHandler, deleteHandl
       <button
         type="button"
         onClick={archiveHandler}
-        className="text-sm border rounded-lg px-4 py-2.5 text-center mr-2 mb-2 border-yellow-300 text-yellow-400 hover:text-white hover:bg-yellow-500 focus:ring-yellow-900"
+        className="text-sm border rounded-lg px-4 py-2.5 text-center mr-2 mb-2 hover:text-white dark:hover:text-white  border-yellow-400 text-yellow-500 hover:bg-yellow-600 dark:border-yellow-300 dark:text-yellow-400 dark:hover:bg-yellow-500 focus:ring-yellow-900"
       >
         {isArchived ? actionButton.unarchive : actionButton.archive}
       </button>
       <button
         type="button"
         onClick={deleteHandler}
-        className="text-sm border rounded-lg px-4 py-2.5 text-center mr-2 mb-2 border-red-300 text-red-400 hover:text-white hover:bg-red-500 focus:ring-red-900"
+        className="text-sm border rounded-lg px-4 py-2.5 text-center mr-2 mb-2 hover:text-white dark:hover:text-white border-red-400 text-red-500 hover:bg-red-600 dark:border-red-300 dark:text-red-400 dark:hover:bg-red-500 focus:ring-red-900"
       >
         {actionButton.delete}
       </button>

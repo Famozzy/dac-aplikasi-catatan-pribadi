@@ -5,9 +5,9 @@ import NoteWrapper from "./NoteWrapper"
 export default function NoteList({ title, notes, archiveHandler, deleteHandler, isLoading }) {
   return (
     <div className="mt-5 space-y-5">
-      <h2 className="text-2xl font-medium text-gray-200 col-span-3">
+      <h2 className="text-2xl font-medium text-gray-700 dark:text-gray-200 col-span-3">
         {title}
-        <span className="text-gray-400">{`[${notes.length}]`}</span>
+        <span className="text-gray-500 dark:text-gray-400">{`[${notes.length}]`}</span>
       </h2>
       <NoteWrapper isLoading={isLoading}>
         {notes.map((note, i) => (

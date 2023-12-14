@@ -72,7 +72,7 @@ export default function RegisterForm() {
       />
       <button
         type="submit"
-        className="w-full py-2.5 bg-blue-500 text-white rounded-lg hover:bg-blue-600 focus:ring-blue-900"
+        className="w-full py-2.5 bg-blue-600 hover:bg-blue-700 text-white rounded-lg dark:bg-blue-500 dark:hover:bg-blue-600 focus:ring-blue-900"
       >
         {locales[locale].registerTitle}
       </button>

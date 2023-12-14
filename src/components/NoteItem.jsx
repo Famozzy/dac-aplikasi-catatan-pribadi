@@ -4,7 +4,7 @@ import PropTypes from "prop-types"
 
 export default function NoteItem({ note, archiveHandler, deleteHandler }) {
   return (
-    <div className="block border border-gray-700 rounded-lg p-4 h-fit w-full hover:bg-gray-800">
+    <div className="block border border-gray-400 hover:shadow-lg hover:bg-gray-100 rounded-lg p-4 h-fit w-full dark:hover:bg-gray-800 dark:border-gray-700">
       <NoteItemContent id={note.id} title={note.title} body={note.body} createdAt={note.createdAt} />
       <NoteItemAction
         isArchived={note.archived}
