@@ -17,7 +17,7 @@ export default function NotePage() {
 
   const searchHandler = (keyword) => {
     setKeyword(keyword)
-    setSearchParams({ keyword })
+    keyword ? setSearchParams({ keyword }) : setSearchParams({})
   }
 
   const noteToRender = notes.filter((note) => note.title.toLowerCase().includes(keyword.toLowerCase()))

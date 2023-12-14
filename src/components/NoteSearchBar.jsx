@@ -14,7 +14,7 @@ export default function NoteSearchBar({ keyword, searchHandler }) {
         label={locales[locale].searchLabel}
         type="text"
         value={keyword}
-        onChange={searchHandler}
+        onChange={(e) => searchHandler(e.target.value)}
         placeholder={locales[locale].searchPlaceholder}
       />
     </div>
