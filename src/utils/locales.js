@@ -31,6 +31,9 @@ const locales = {
     searchPlaceholder: "Cari catatan berdasarkan judul",
     // greeting
     greeting: "Halo, ",
+    // not found page
+    notFoundMessage: "Halaman tidak ditemukan, Kembali ke",
+    notFoundLink: "halaman utama",
   },
   EN: {
     // login page
@@ -64,6 +67,9 @@ const locales = {
     searchPlaceholder: "Search notes by title",
     // greeting
     greeting: "Hello, ",
+    // not found page
+    notFoundMessage: "Page not found, Back to ",
+    notFoundLink: "home page",
   },
 }
 
